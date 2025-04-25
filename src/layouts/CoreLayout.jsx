@@ -13,16 +13,16 @@ const { Sider, Header: AntHeader, Content, Footer } = Layout;
 
 
 export default function CoreLayout() {
-    const [siderCollapsed, setSiderCollapsed] = useState(false);
+    const [collapsed, setCollapsed] = useState(false);
 
     return <Layout>
-        <Sider theme="light" trigger={null} collapsible collapsed={siderCollapsed} className="sider">
+        <Sider theme="light" trigger={null} collapsible collapsed={collapsed} className="sider">
             <Sidebar />
             <Button
                 type="text"
                 className="triger-bnt"
-                icon={siderCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                onClick={() => setSiderCollapsed(!siderCollapsed)} />
+                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                onClick={() => setCollapsed(!collapsed)} />
         </Sider>
 
         <Layout>
