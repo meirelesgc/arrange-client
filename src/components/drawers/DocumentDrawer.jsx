@@ -1,11 +1,37 @@
-import { Drawer as AntDrawer, Typography, Upload, Flex } from 'antd';
-import { InboxOutlined } from '@ant-design/icons';
+import { useState } from 'react'
+import { Drawer as AntDrawer, Typography, Upload, Flex, Button } from 'antd'
+import { InboxOutlined } from '@ant-design/icons'
 
-const { Dragger } = Upload;
+// import { useCreateDoc } from '../../hooks/useDoc'
+
+const { Dragger } = Upload
 
 export default function Drawer({ title, toggleDrawer, open }) {
+    // const { mutate } = useCreateDoc()
+    const [fileList, setFileList] = useState([])
+
+    const props = {
+        beforeUpload: (file) => {
+            setFileList(prev => [...prev, file])
+            return false
+        },
+        onRemove: (file) => {
+            setFileList(prev => prev.filter(item => item.uid !== file.uid))
+        },
+        fileList
+    }
+
+    const handleUpload = () => {
+        fileList.forEach(file => {
+            const formData = new FormData()
+            formData.append('file', file)
+            // mutate(formData)
+        })
+        setFileList([])
+    }
+
     return <AntDrawer title={title} onClose={toggleDrawer} open={open}>
-        <Dragger>
+        <Dragger {...props} multiple >
             <Flex vertical align='center'>
                 <InboxOutlined className='logo' style={{ fontSize: '48px' }} />
                 <Typography.Title level={5} style={{ marginTop: '10px' }}>
@@ -16,5 +42,8 @@ export default function Drawer({ title, toggleDrawer, open }) {
                 </Typography.Text>
             </Flex>
         </Dragger>
+        <Button block type='primary' onClick={handleUpload}>
+            Enviar Arquivos
+        </Button>
     </AntDrawer>
 }

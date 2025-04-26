@@ -9,7 +9,6 @@ export default function Doc() {
     const [collapsed, setCollapsed] = useState(false);
 
     const toggleDrawer = () => {
-        console.log(collapsed)
         setCollapsed(!collapsed);
     };
 
