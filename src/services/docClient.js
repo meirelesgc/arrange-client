@@ -7,12 +7,16 @@ export async function createDoc(file) {
     return response.data
 }
 
-export async function fetchDoc() {
-
+export async function fetchDocs() {
+    const response = await client.get('/doc/')
+    return response.data
 }
 
-export async function deleteDoc() {
-
+export async function deleteDoc({ id }) {
+    const response = await client.delete(`/doc/${id}/`);
+    return response.data;
 }
+
+
 
 

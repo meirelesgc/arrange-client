@@ -6,7 +6,7 @@ import './index.css'
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
-  <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
-  </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+    </QueryClientProvider>
 )

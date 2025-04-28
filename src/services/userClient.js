@@ -14,6 +14,6 @@ export async function token({ email, password }) {
 }
 
 export async function user({ id }) {
-    const response = await client.get(`/user/${id}`);
+    const response = await client.get(`/user/${id}/`);
     return response.data;
 }

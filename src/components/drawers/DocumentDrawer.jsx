@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { Drawer as AntDrawer, Typography, Upload, Flex, Button } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 
-// import { useCreateDoc } from '../../hooks/useDoc'
+import { useCreateDoc } from '../../hooks/useDoc'
 
 const { Dragger } = Upload
 
 export default function Drawer({ title, toggleDrawer, open }) {
-    // const { mutate } = useCreateDoc()
+    const { mutate } = useCreateDoc()
     const [fileList, setFileList] = useState([])
 
     const props = {
@@ -25,7 +25,7 @@ export default function Drawer({ title, toggleDrawer, open }) {
         fileList.forEach(file => {
             const formData = new FormData()
             formData.append('file', file)
-            // mutate(formData)
+            mutate(formData)
         })
         setFileList([])
     }
