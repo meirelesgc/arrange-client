@@ -1,5 +1,5 @@
-import { token } from "../services/userClient";
-import { useMutation } from "@tanstack/react-query";
+import { token, user } from "../services/userClient";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useToken() {
     return useMutation({
@@ -7,4 +7,12 @@ export function useToken() {
         onSuccess: () => { console.log('Sucesso') },
         onError: (error) => { console.log('Falha', error) },
     })
+}
+
+export function useUser(id) {
+    return useQuery({
+        queryKey: ['fetchUser', id],
+        queryFn: () => user({ id }),
+        enabled: !!id,
+    });
 }

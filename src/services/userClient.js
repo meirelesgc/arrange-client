@@ -1,5 +1,5 @@
 import { client } from "../services/client";
-import { setToken } from "../services/auth";
+import { setToken, setId } from "../services/auth";
 
 export async function token({ email, password }) {
     const form = new URLSearchParams()
@@ -9,5 +9,11 @@ export async function token({ email, password }) {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     setToken(response.data.access_token)
+    setId(response.data.id)
     return response.data
+}
+
+export async function user({ id }) {
+    const response = await client.get(`/user/${id}`);
+    return response.data;
 }

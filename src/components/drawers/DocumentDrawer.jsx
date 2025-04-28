@@ -30,7 +30,7 @@ export default function Drawer({ title, toggleDrawer, open }) {
         setFileList([])
     }
 
-    return <AntDrawer title={title} onClose={toggleDrawer} open={open}>
+    return <AntDrawer title={title} onClose={toggleDrawer} open={open} size='large'>
         <Dragger {...props} multiple >
             <Flex vertical align='center'>
                 <InboxOutlined className='logo' style={{ fontSize: '48px' }} />
