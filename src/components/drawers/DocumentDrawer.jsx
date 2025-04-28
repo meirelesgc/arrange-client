@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Drawer as AntDrawer, Typography, Upload, Flex, Button } from 'antd'
+import { Drawer as AntDrawer, Typography, Upload, Flex, Button, Card } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 
 import { useCreateDoc } from '../../hooks/useDoc'
@@ -31,19 +31,21 @@ export default function Drawer({ title, toggleDrawer, open }) {
     }
 
     return <AntDrawer title={title} onClose={toggleDrawer} open={open} size='large'>
-        <Dragger {...props} multiple >
-            <Flex vertical align='center'>
-                <InboxOutlined className='logo' style={{ fontSize: '48px' }} />
-                <Typography.Title level={5} style={{ marginTop: '10px' }}>
-                    Clique ou arraste o arquivo para esta área para fazer upload
-                </Typography.Title>
-                <Typography.Text>
-                    Suporte para upload único ou em massa.
-                </Typography.Text>
-            </Flex>
-        </Dragger>
-        <Button block type='primary' onClick={handleUpload}>
-            Enviar Arquivos
-        </Button>
+        <Flex vertical gap={'large'} >
+            <Dragger {...props} multiple>
+                <Flex vertical align='center'>
+                    <InboxOutlined className='logo' style={{ fontSize: '48px' }} />
+                    <Typography.Title level={5} style={{ marginTop: '10px' }}>
+                        Clique ou arraste o arquivo para esta área para fazer upload
+                    </Typography.Title>
+                    <Typography.Text>
+                        Suporte para upload único ou em massa.
+                    </Typography.Text>
+                </Flex>
+            </Dragger>
+            <Button block type='primary' onClick={handleUpload}>
+                Enviar Arquivos
+            </Button>
+        </Flex>
     </AntDrawer>
 }
