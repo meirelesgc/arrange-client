@@ -22,14 +22,13 @@ export function useFetchDocs() {
     })
 }
 
-export function useDeleteDoc(id) {
+export function useDeleteDoc() {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: () => deleteDoc({ id }),
-        enabled: !!id,
+        mutationFn: (id) => deleteDoc({ id }),
         onSuccess: () => {
             queryClient.invalidateQueries(['fetchDocuments']);
         },
         onError: (error) => { console.log('Falha', error) },
-    })
+    });
 }
