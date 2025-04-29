@@ -5,6 +5,7 @@ import { UploadOutlined } from '@ant-design/icons';
 
 import Banner from '../components/Banner'
 import Drawer from "../components/drawers/ParamDrawer";
+import { Table } from "../components/tables/ParamTable";
 
 export default function Params() {
     const [collapsed, setCollapsed] = useState(false);
@@ -32,6 +33,7 @@ export default function Params() {
                 title='Gerenciamento de Documentos'
                 description='Aqui você pode ver a lista de documentos cadastrados e acompanhar o estado atual do processamento.'
                 buttons={[sendDrawer()]} />
+            <Table />
         </Flex>
     </div>
 
