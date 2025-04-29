@@ -73,19 +73,23 @@ function UserDrawer({ id }) {
         </Space>
         <Divider />
         <Form form={form} initialValues={{ username: data.username, email: data.email, password: data.password }} onFinish={handleFinish}>
-            <Typography.Title level={5} strong>Nome completo:</Typography.Title>
-            <Form.Item name="username"><Input size="large" /></Form.Item>
-            <Space align="end">
-                <Space direction="vertical" size="small">
-                    <Typography.Title level={5} strong>E-mail:</Typography.Title>
-                    <Form.Item name="email" ><Input size="large" /></Form.Item>
-                </Space>
-                <Space direction="vertical" size="small">
-                    <Typography.Title level={5} strong>Senha:</Typography.Title>
-                    <Form.Item name="password"><Input size="large" /></Form.Item>
+            <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                <Typography.Title level={5} strong>Nome completo:</Typography.Title>
+                <Form.Item name="username"><Input size="large" /></Form.Item>
+            </Space>
+            <Flex vertical>
+                <Space align="end" wrap >
+                    <Space direction="vertical" size="small">
+                        <Typography.Title level={5} strong>E-mail:</Typography.Title>
+                        <Form.Item name="email" ><Input size="large" /></Form.Item>
+                    </Space>
+                    <Space direction="vertical" size="small">
+                        <Typography.Title level={5} strong>Senha:</Typography.Title>
+                        <Form.Item name="password"><Input size="large" /></Form.Item>
+                    </Space>
                 </Space>
                 <Button type="primary" size="large" htmlType="submit">Atualizar dados</Button>
-            </Space>
+            </Flex>
         </Form>
         <Divider />
     </Flex >
