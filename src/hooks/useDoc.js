@@ -1,4 +1,4 @@
-import { createDoc, fetchDocs, deleteDoc } from '../services/docClient'
+import { createDoc, fetchDocs, deleteDoc, fetchDocFile } from '../services/docClient'
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useCreateDoc() {
@@ -20,6 +20,23 @@ export function useFetchDocs() {
         onSuccess: () => { console.log('Sucesso') },
         onError: (error) => { console.log('Falha', error) },
     })
+}
+
+
+
+export function useFetchDocFile(id) {
+    return useQuery({
+        queryKey: ['fetchDocFile', id],
+        queryFn: () => fetchDocFile(id),
+        enabled: !!id,
+        refetchOnWindowFocus: false,
+        onSuccess: (data) => {
+            console.log('Arquivo recuperado com sucesso:', data);
+        },
+        onError: (error) => {
+            console.error('Erro ao recuperar o arquivo:', error);
+        },
+    });
 }
 
 export function useDeleteDoc() {

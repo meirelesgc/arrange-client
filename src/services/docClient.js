@@ -12,6 +12,14 @@ export async function fetchDocs() {
     return response.data
 }
 
+
+export async function fetchDocFile(id) {
+    const response = await client.get(`/doc/${id}/file/`, {
+        responseType: 'blob',
+    });
+    return response.data;
+}
+
 export async function deleteDoc({ id }) {
     const response = await client.delete(`/doc/${id}/`);
     return response.data;

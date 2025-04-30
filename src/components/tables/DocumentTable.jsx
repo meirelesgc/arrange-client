@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { Table as AntTable } from "antd";
 
 import { useFetchDocs, useDeleteDoc } from '../../hooks/useDoc'
@@ -7,8 +9,10 @@ import config from "./table.config/Doc";
 export function Table() {
     const { data, isLoading } = useFetchDocs()
     const { mutate } = useDeleteDoc()
+    const navigate = useNavigate();
 
     const handleOpen = record => {
+        navigate(`/doc/${record.id}/`)
         console.log(record)
     }
 

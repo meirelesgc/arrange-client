@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, Flex, Typography } from "antd";
 
-const Banner = ({ title, description, buttons }) => {
+export default function Banner({ title, description, buttons }) {
     return <Card style={{ height: 260, padding: '20px' }}>
         <Flex vertical gap='30px'>
             <Flex vertical align="flex-start">
@@ -28,5 +28,3 @@ const Banner = ({ title, description, buttons }) => {
         </Flex>
     </Card>;
 };
-
-export default Banner;
