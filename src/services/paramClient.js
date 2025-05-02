@@ -11,7 +11,6 @@ export async function fetchParams() {
 }
 
 export async function deleteParam(id) {
-    console.log(id)
     const response = await client.delete(`/param/${id}/`);
     return response.data
 }
