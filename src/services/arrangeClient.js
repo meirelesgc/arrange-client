@@ -11,6 +11,7 @@ export async function putMetrics(id) {
 }
 
 export async function patchMetrics(id, output) {
-    const response = await client.patch(`/arrange/${id}/metrics/`, output)
-    return response.data
+    console.log(id, output);
+    const response = await client.patch(`/arrange/${id}/metrics/`, output);
+    return response.data;
 }

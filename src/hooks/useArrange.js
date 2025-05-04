@@ -12,15 +12,17 @@ export function useGetMetrics(id) {
 }
 
 export function usePatchMetrics() {
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: patchMetrics,
+        mutationFn: ({ id, output }) => patchMetrics(id, output),
         onSuccess: () => {
             queryClient.invalidateQueries(['fetchMetrics']);
-            console.log('Sucesso')
+            console.log('Sucesso');
         },
-        onError: (error) => { console.log('Falha', error) },
-    })
+        onError: (error) => {
+            console.log('Falha', error);
+        },
+    });
 }
 
 export function usePutMetrics() {

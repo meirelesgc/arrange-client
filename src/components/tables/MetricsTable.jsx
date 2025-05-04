@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-import { Table as AntTable } from "antd";
+import { message, Table as AntTable, Button, Card, Flex, Typography } from "antd";
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 import { usePatchMetrics } from "../../hooks/useArrange";
 
@@ -10,6 +11,8 @@ import { useParams } from "react-router-dom";
 export function Table({ output }) {
     const { id } = useParams()
     const { mutate } = usePatchMetrics()
+    const [messageApi, contextHolder] = message.useMessage();
+
     if (!output) return <div>EM OBRAS</div>
     const [_output, _setOutput] = useState(Object.entries(output).map(([key, value], index) => ({
         key: index, param: key, output: value || []
@@ -20,14 +23,43 @@ export function Table({ output }) {
         _setOutput(updated)
     }
 
-    function handleValidate(output) {
-        mutate(id, output)
+    function outputRollback(data) {
+        return data.reduce((acc, item) => {
+            acc[item.param] = item.output;
+            return acc;
+        }, {});
     }
 
-    return <AntTable
-        bordered
-        columns={config(handleChange)}
-        dataSource={_output}
-        rowKey={'key'}
-        pagination={false} />
+    function handleSend() {
+        const convertedOutput = outputRollback(_output);
+        const hasMultipleValues = Object.values(convertedOutput).some(values => values.length > 1);
+        if (hasMultipleValues) {
+            messageApi.error("Cada parâmetro deve conter no máximo um valor.");
+            return;
+        }
+        mutate({ id, output: convertedOutput });
+    }
+
+
+
+    return <Flex vertical gap='2.3rem'>
+        {contextHolder}
+        <AntTable
+            bordered
+            columns={config(handleChange)}
+            dataSource={_output}
+            rowKey={'key'}
+            pagination={false} />
+        <Card >
+            <Flex justify="space-between">
+                <Flex justify="space-between" align="center" gap={'large'}>
+                    <ExclamationCircleOutlined style={{ fontSize: '30' }} />
+                    <Typography.Title level={5} strong>
+                        Por favor, revise o documento e corrija os dados que não foram extraídos corretamente.
+                    </Typography.Title>
+                </Flex>
+                <Button size="large" type="primary" onClick={handleSend}>Concluido</Button>
+            </Flex>
+        </Card>
+    </Flex>
 }
