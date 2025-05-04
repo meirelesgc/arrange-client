@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom"
 
 import { message, Table as AntTable, Button, Card, Flex } from "antd";
 
-import { usePatchDetails } from "../../hooks/useArrange";
+import { usePatchPatient } from "../../hooks/useArrange";
 import config from '../tables/table.config/Details';
 
 export function Table({ output }) {
     const { id } = useParams();
-    const { mutate } = usePatchDetails();
+    const { mutate } = usePatchPatient()
     const [messageApi, contextHolder] = message.useMessage();
 
     const [_output, _setOutput] = useState(
@@ -16,27 +16,23 @@ export function Table({ output }) {
             key: index, param: key, output: value || ""
         }))
     );
-
     function handleChange(param, value) {
         const updated = _output.map(item =>
             item.param === param ? { ...item, output: value } : item
         );
         _setOutput(updated);
     }
-
     function outputRollback(data) {
         return data.reduce((acc, item) => {
             acc[item.param] = item.output;
             return acc;
         }, {});
     }
-
     function handleSend() {
         const convertedOutput = outputRollback(_output);
         mutate({ id, output: convertedOutput });
     }
-
-    return <Flex vertical gap='2.3rem'>
+    return <Flex vertical gap='2.3rem' >
         {contextHolder}
         <AntTable
             bordered

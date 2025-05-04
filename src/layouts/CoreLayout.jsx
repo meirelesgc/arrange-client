@@ -15,7 +15,7 @@ const { Sider, Header: AntHeader, Content, Footer } = Layout;
 export default function CoreLayout() {
     const [collapsed, setCollapsed] = useState(false);
 
-    return <Layout>
+    return <Layout className="layout">
         <Sider theme="light" trigger={null} collapsible collapsed={collapsed} className="sider">
             <Sidebar />
             <Button

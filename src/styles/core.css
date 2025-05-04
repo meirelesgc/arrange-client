@@ -1,3 +1,9 @@
+.layout {
+    height: 100vh;
+    position: sticky !important;
+    overflow: hidden;
+}
+
 .header {
     padding-top: 12px;
     background: #fff;
@@ -6,6 +12,7 @@
 .content {
     margin: 24px 16px;
     padding: 20px;
+    overflow: hidden;
 }
 
 .footer {

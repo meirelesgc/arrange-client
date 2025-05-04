@@ -29,3 +29,18 @@ export async function patchDetails(id, output) {
     const response = await client.patch(`/arrange/${id}/details/`, output);
     return response.data;
 }
+
+export async function getPatient(id) {
+    const response = await client.get(`/arrange/${id}/patient/`)
+    return response.data
+}
+
+export async function putPatient(id) {
+    const response = await client.put(`/arrange/${id}/patient/`)
+    return response.data
+}
+
+export async function patchPatient(id, output) {
+    const response = await client.patch(`/arrange/${id}/patient/`, output);
+    return response.data;
+}
