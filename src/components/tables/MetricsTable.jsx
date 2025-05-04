@@ -13,7 +13,6 @@ export function Table({ output }) {
     const { mutate } = usePatchMetrics()
     const [messageApi, contextHolder] = message.useMessage();
 
-    if (!output) return <div>EM OBRAS</div>
     const [_output, _setOutput] = useState(Object.entries(output).map(([key, value], index) => ({
         key: index, param: key, output: value || []
     })))
@@ -40,8 +39,6 @@ export function Table({ output }) {
         mutate({ id, output: convertedOutput });
     }
 
-
-
     return <Flex vertical gap='2.3rem'>
         {contextHolder}
         <AntTable
@@ -51,15 +48,7 @@ export function Table({ output }) {
             rowKey={'key'}
             pagination={false} />
         <Card >
-            <Flex justify="space-between">
-                <Flex justify="space-between" align="center" gap={'large'}>
-                    <ExclamationCircleOutlined style={{ fontSize: '30' }} />
-                    <Typography.Title level={5} strong>
-                        Por favor, revise o documento e corrija os dados que não foram extraídos corretamente.
-                    </Typography.Title>
-                </Flex>
-                <Button size="large" type="primary" onClick={handleSend}>Concluido</Button>
-            </Flex>
+            <Button size="large" type="primary" style={{ width: '100%' }} onClick={handleSend}>Enviar metricas</Button>
         </Card>
     </Flex>
 }

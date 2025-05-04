@@ -28,7 +28,9 @@ export default function Home() {
                         </Typography.Text>
                     </Flex>
                 </Card>
-                <Details /><Metrics /><Patient />
+                <Details />
+                <Metrics />
+                <Patient />
             </Flex>
         </Splitter.Panel>
     </Splitter>
