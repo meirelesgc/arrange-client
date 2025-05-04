@@ -20,7 +20,7 @@ export default function Drawer({ title, toggleDrawer, open }) {
                 toggleDrawer()
             })
             .catch(error => {
-                console.log('[ERRO]', error)
+                // DEBITO
             })
     };
 

@@ -1,6 +1,6 @@
 import { Form, Drawer as AntDrawer, Input, Flex, Button, message, Typography, Skeleton, Space, Divider, Select } from 'antd';
 
-import { getToken, getId } from '../../services/auth'
+import { getId } from '../../services/auth'
 import { useToken, useUser } from '../../hooks/useUser';
 
 function LoginDrawer() {

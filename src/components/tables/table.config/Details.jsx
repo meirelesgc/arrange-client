@@ -1,10 +1,12 @@
-import { Select } from "antd";
+import { Input } from "antd";
 
 export default function Config(handleChange) {
 
     function outputRender(_, record) {
-        return <Select mode="tags" style={{ width: '100%' }} value={record.output} onChange={(e) => handleChange(record.param, e)} />
+        return <Input style={{ width: '100%' }} value={record.output}
+            onChange={(e) => handleChange(record.param, e.target.value)} />
     }
+
     return [
         {
             title: "Parâmetro",
@@ -13,7 +15,7 @@ export default function Config(handleChange) {
             width: '50%',
         },
         {
-            title: "Dado extraido",
+            title: "Dado extraído",
             dataIndex: "output",
             key: "output",
             width: '50%',

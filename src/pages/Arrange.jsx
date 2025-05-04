@@ -1,9 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Flex, Splitter, Card, Typography } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
 
 import Doc from '../components/Doc';
-import Banner from '../components/Banner';
 import Details from '../components/arranges/Details'
 import Metrics from '../components/arranges/Metrics'
 import Patient from '../components/arranges/Patient'
@@ -28,9 +26,7 @@ export default function Home() {
                         </Typography.Text>
                     </Flex>
                 </Card>
-                <Details />
-                <Metrics />
-                <Patient />
+                <Details /> <Metrics /> <Patient />
             </Flex>
         </Splitter.Panel>
     </Splitter>

@@ -12,6 +12,10 @@ export default function Metrics() {
     const { data, isLoading } = useGetMetrics(id)
     const { mutate } = usePutMetrics()
 
+    if (isLoading) return <Card style={{ padding: '20px' }}>
+        <Skeleton />
+    </Card>
+
     function handleArrange() {
         mutate(id)
     }
@@ -24,11 +28,6 @@ export default function Metrics() {
         { key: '2', label: 'Duração', children: <p>{data.duration ? `${data.duration} segundos` : '—'}</p> },
         { key: '3', label: 'Atualizado em', children: <p>{data.updated_at ? formatDate(data.updated_at) : '—'}</p> }
     ];
-
-
-    if (isLoading) return <Card style={{ padding: '20px' }}>
-        <Skeleton />
-    </Card>
 
     return <Flex vertical gap='2.3rem'>
         <Card style={{ padding: '20px' }}>

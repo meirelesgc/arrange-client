@@ -13,7 +13,6 @@ export function Table() {
 
     const handleOpen = record => {
         navigate(`/doc/${record.id}/`)
-        console.log(record)
     }
 
     const handleDelete = record => {
