@@ -9,7 +9,6 @@ export async function token({ email, password }) {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
     setToken(response.data.access_token)
-    setId(response.data.id)
     return response.data
 }
 

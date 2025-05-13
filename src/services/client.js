@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { message } from 'antd';
-import { getToken, removeId, removeToken } from './auth';
+import { getToken, removeToken } from './auth';
 
 const baseURL = import.meta.env.VITE_API_URL;
 
@@ -22,7 +22,7 @@ client.interceptors.response.use(
     error => {
         if (error.response && error.response.status === 401) {
             message.error('Você precisa fazer login para acessar este recurso.');
-            removeToken(); removeId();
+            removeToken();
         }
         return Promise.reject(error);
     }
