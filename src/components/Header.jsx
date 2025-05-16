@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Avatar, Flex, Typography, Input } from "antd";
 import { MessageOutlined, NotificationOutlined, UserOutlined } from "@ant-design/icons";
 
-import Drawer from '../components/drawers/UserDrawer'
+import Drawer from '../components/drawers/AccountDrawer'
 
 const { Search } = Input
 
