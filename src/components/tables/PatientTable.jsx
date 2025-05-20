@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom"
 import { message, Table as AntTable, Button, Card, Flex } from "antd";
 
 import { usePatchPatient } from "../../hooks/useArrange";
-import config from '../tables/table.config/Details';
+import config from '../tables/table.config/Patient';
 
 export function Table({ output }) {
     const { id } = useParams();

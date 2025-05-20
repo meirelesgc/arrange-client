@@ -3,11 +3,13 @@ import { Input } from "antd";
 export default function Config(handleChange) {
 
     const paramTranslation = {
-        cnpj: "CNPJ",
-        issued_by: "Emitido por",
-        document_type: "Tipo de documento",
-        hospital_name: "Nome do hospital",
-        printing_datetime: "Data/hora da impressão",
+        email: "E-mail",
+        phone: "Telefone",
+        gender: "Gênero",
+        full_name: "Nome completo",
+        insurance: "Convênio",
+        date_of_birth: "Data de nascimento",
+        admission_date: "Data de admissão",
     };
 
     function outputRender(_, record) {
