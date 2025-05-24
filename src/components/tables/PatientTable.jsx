@@ -6,7 +6,7 @@ import { message, Table as AntTable, Button, Card, Flex } from "antd";
 import { usePatchPatient } from "../../hooks/useArrange";
 import config from '../tables/table.config/Patient';
 
-export function Table({ output }) {
+export default function Table({ output }) {
     const { id } = useParams();
     const { mutate } = usePatchPatient()
     const [messageApi, contextHolder] = message.useMessage();
@@ -16,6 +16,7 @@ export function Table({ output }) {
             key: index, param: key, output: value || ""
         }))
     );
+
     function handleChange(param, value) {
         const updated = _output.map(item =>
             item.param === param ? { ...item, output: value } : item

@@ -6,7 +6,7 @@ import { message, Table as AntTable, Button, Card, Flex } from "antd";
 import { usePatchDetails } from "../../hooks/useArrange";
 import config from '../tables/table.config/Details';
 
-export function Table({ output }) {
+export default function Table({ output }) {
     const { id } = useParams();
     const { mutate } = usePatchDetails();
     const [messageApi, contextHolder] = message.useMessage();

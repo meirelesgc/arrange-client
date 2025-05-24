@@ -7,7 +7,7 @@ import { usePatchMetrics } from "../../hooks/useArrange";
 import config from '../tables/table.config/Metrics'
 import { useParams } from "react-router-dom";
 
-export function Table({ output }) {
+export default function Table({ output }) {
     const { id } = useParams()
     const { mutate } = usePatchMetrics()
     const [messageApi, contextHolder] = message.useMessage();

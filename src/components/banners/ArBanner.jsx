@@ -1,8 +1,6 @@
 import { Descriptions, Button, Flex, Card, Typography, Skeleton, Divider } from "antd"
 import { ClockCircleOutlined, SyncOutlined, ExclamationCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 
-import { useGetDetails, usePutDetails } from "../../hooks/useArrange"
-
 import { useParams } from "react-router-dom";
 
 export default function Banner({ title, description, data, mutate }) {

@@ -3,11 +3,15 @@ import { Flex, Splitter, Card, Typography, Skeleton } from 'antd';
 
 import Doc from '../components/Doc';
 
-import Banner from '../components/banners/ArrangeBanner';
+import Banner from '../components/banners/ArBanner';
 
 import { useGetDetails, usePutDetails } from '../hooks/useArrange';
 import { useGetMetrics, usePutMetrics } from '../hooks/useArrange';
 import { useGetPatient, usePutPatient } from '../hooks/useArrange';
+
+import DetailsTable from '../components/tables/DetailsTable'
+import PatientTable from '../components/tables/PatientTable'
+import MetricsTable from '../components/tables/MetricsTable'
 
 export default function Home() {
     const { id } = useParams();
@@ -45,10 +49,13 @@ export default function Home() {
                 </Card>
                 <Banner title='Dados do documento' description='Essas informações nos ajudam a organizar as tabelas posteriormente'
                     data={detailsData} mutate={updateDetails} />
+                <DetailsTable output={detailsData.output} />
                 <Banner title='Metricas extraidas' description='Dados médicos baseados na lista de parametros previamente cadastrados'
                     data={metricsData} mutate={updateMetrics} />
+                <MetricsTable output={metricsData.output} />
                 <Banner title='Dados do paciente' description='Nenhum dos dados mostrados a seguir foi compartilhado ou armazenado sem autorização'
                     data={patientData} mutate={updatePatient} />
+                <PatientTable output={patientData.output} />
             </Flex>
         </Splitter.Panel>
     </Splitter>
