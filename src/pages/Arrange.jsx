@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Flex, Splitter, Card, Typography, Skeleton } from 'antd';
 
@@ -25,11 +26,30 @@ export default function Home() {
     const { data: patientData, isLoading: patientIsLoading } = useGetPatient(id);
     const { mutate: updatePatient } = usePutPatient();
 
-    if (detailsIsLoading || metricsIsLoading || patientIsLoading)
+    const [_detailsData, _setDetailsData] = useState([])
+    const [_metricsData, _setMetricsData] = useState([])
+    const [_patientData, _setPatientData] = useState([])
+
+    function mapOutputToArray(output, defaultValue = "") {
+        return Object.entries(output).map(([param, value], key) => ({
+            key, param, output: value ?? defaultValue
+        }));
+    }
+
+    useEffect(() => {
+        if (detailsData?.output) _setDetailsData(mapOutputToArray(detailsData.output, ''))
+    }, [detailsData])
+    useEffect(() => {
+        if (metricsData?.output) _setMetricsData(mapOutputToArray(metricsData.output, []))
+    }, [metricsData])
+    useEffect(() => {
+        if (patientData?.output) _setPatientData(mapOutputToArray(patientData.output, ''))
+    }, [patientData])
+
+    if (metricsIsLoading || patientIsLoading)
         return <Card style={{ padding: '20px' }}>
             <Skeleton />
         </Card>
-
 
     return <Splitter>
         <Splitter.Panel defaultSize="40%" min="20%" max="70%">
@@ -49,13 +69,13 @@ export default function Home() {
                 </Card>
                 <Banner title='Dados do documento' description='Essas informações nos ajudam a organizar as tabelas posteriormente'
                     data={detailsData} mutate={updateDetails} />
-                <DetailsTable output={detailsData.output} />
+                <DetailsTable _output={_detailsData} _setOutput={_setDetailsData} isLoading={detailsIsLoading} />
                 <Banner title='Metricas extraidas' description='Dados médicos baseados na lista de parametros previamente cadastrados'
                     data={metricsData} mutate={updateMetrics} />
-                <MetricsTable output={metricsData.output} />
+                <MetricsTable _output={_metricsData} _setOutput={_setMetricsData} isLoading={metricsIsLoading} />
                 <Banner title='Dados do paciente' description='Nenhum dos dados mostrados a seguir foi compartilhado ou armazenado sem autorização'
                     data={patientData} mutate={updatePatient} />
-                <PatientTable output={patientData.output} />
+                <PatientTable _output={_patientData} _setOutput={_setPatientData} isLoading={patientIsLoading} />
             </Flex>
         </Splitter.Panel>
     </Splitter>

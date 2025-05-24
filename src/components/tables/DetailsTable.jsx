@@ -6,16 +6,10 @@ import { message, Table as AntTable, Button, Card, Flex } from "antd";
 import { usePatchDetails } from "../../hooks/useArrange";
 import config from '../tables/table.config/Details';
 
-export default function Table({ output }) {
+export default function Table({ _output, _setOutput, isLoading }) {
     const { id } = useParams();
     const { mutate } = usePatchDetails();
     const [messageApi, contextHolder] = message.useMessage();
-
-    const [_output, _setOutput] = useState(
-        Object.entries(output).map(([key, value], index) => ({
-            key: index, param: key, output: value || ""
-        }))
-    );
 
     function handleChange(param, value) {
         const updated = _output.map(item =>
@@ -39,6 +33,7 @@ export default function Table({ output }) {
     return <Flex vertical gap='2.3rem'>
         {contextHolder}
         <AntTable
+            loading={isLoading}
             bordered
             columns={config(handleChange)}
             dataSource={_output}
