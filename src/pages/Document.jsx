@@ -4,7 +4,7 @@ import { Flex } from "antd";
 import { UploadOutlined } from '@ant-design/icons';
 
 import Drawer from '../components/drawers/DocumentDrawer'
-import Banner from '../components/Banner'
+import Banner from '../components/banners/Banner'
 import { Table } from "../components/tables/DocumentTable";
 
 export default function Doc() {

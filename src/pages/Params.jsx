@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Flex } from "antd";
 import { UploadOutlined } from '@ant-design/icons';
 
-import Banner from '../components/Banner'
+import Banner from '../components/banners/Banner'
 import Drawer from "../components/drawers/ParamDrawer";
 import { Table } from "../components/tables/ParamTable";
 
