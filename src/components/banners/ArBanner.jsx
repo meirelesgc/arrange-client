@@ -3,11 +3,15 @@ import { ClockCircleOutlined, SyncOutlined, ExclamationCircleOutlined, CheckCirc
 
 import { useParams } from "react-router-dom";
 
-export default function Banner({ title, description, data, mutate }) {
+export default function Banner({ title, description, data, mutate, onSave, disableSave = false }) {
     const { id } = useParams()
 
     function handleArrange() {
         mutate(id)
+    }
+
+    function handleSave() {
+        if (onSave) onSave(id);
     }
 
     const statusIcon = { "STANDBY": { icon: <ClockCircleOutlined />, label: "Aguardando" }, "IN-PROCESS": { icon: <SyncOutlined spin />, label: "Em Processo" }, "FAILED": { icon: <ExclamationCircleOutlined />, label: "Falha" }, "DONE": { icon: <CheckCircleOutlined />, label: "Concluído" } };
@@ -31,7 +35,14 @@ export default function Banner({ title, description, data, mutate }) {
             <Divider />
             <Flex justify="space-between" align="center" gap={'large'}>
                 <Descriptions items={metadata} />
-                <Button size="large" type="primary" onClick={handleArrange}>Realizar extração</Button>
+                <Flex gap="middle">
+                    <Button size="large" onClick={handleSave} disabled={disableSave}>
+                        Salvar alterações
+                    </Button>
+                    <Button size="large" type="primary" onClick={handleArrange}>
+                        Realizar extração
+                    </Button>
+                </Flex>
             </Flex>
         </Card>
     </Flex>
