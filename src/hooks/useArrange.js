@@ -66,7 +66,7 @@ export function usePatchDetails() {
     return useMutation({
         mutationFn: ({ id, output }) => patchDetails(id, output),
         onSuccess: () => {
-            queryClient.invalidateQueries(['fetchMetrics']);
+            queryClient.invalidateQueries(['fetchDetails']);
             console.log('Sucesso');
         },
         onError: (error) => {

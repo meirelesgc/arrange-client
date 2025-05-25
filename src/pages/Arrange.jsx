@@ -19,9 +19,11 @@ export default function Arrange() {
     const { data: detailsData, isLoading: detailsIsLoading } = useGetDetails(id);
     const { mutate: requestDetails } = usePutDetails();
     const { mutate: patchDetails } = usePatchDetails();
+
     const { data: metricsData, isLoading: metricsIsLoading } = useGetMetrics(id);
     const { mutate: requestMetrics } = usePutMetrics();
     const { mutate: patchMetrics } = usePatchMetrics();
+
     const { data: patientData, isLoading: patientIsLoading } = useGetPatient(id);
     const { mutate: requestPatient } = usePutPatient();
     const { mutate: patchPatient } = usePatchPatient();
