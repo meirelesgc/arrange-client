@@ -53,6 +53,29 @@ export default function Arrange() {
         patchDetails({ id, output: payload });
     }
 
+    function saveMetrics() {
+        const payload = metricsTable.reduce((acc, { param, output }) => {
+            acc[param] = output;
+            return acc;
+        }, {});
+
+        const hasMoreThanOne = Object.values(payload).some(v => v?.length > 1);
+        if (hasMoreThanOne) {
+            message.error('Cada parâmetro deve conter no máximo um valor.');
+            return;
+        }
+
+        patchMetrics({ id, output: payload });
+    }
+
+    function savePatient() {
+        const payload = patientTable.reduce((acc, { param, output }) => {
+            acc[param] = output;
+            return acc;
+        }, {});
+        patchPatient({ id, output: payload });
+    }
+
     if (metricsIsLoading || patientIsLoading || detailsIsLoading)
         return <Card style={{ padding: '20px' }}>
             <Skeleton />
@@ -75,40 +98,35 @@ export default function Arrange() {
                     </Flex>
                 </Card>
 
-                <Banner
-                    title="Dados do documento"
-                    description="Essas informações nos ajudam..."
+                <Banner title="Dados do documento" description="Essas informações nos ajudam..."
                     data={detailsData}
                     mutate={requestDetails}
                     onSave={saveDetails}
-                    disableSave={detailsIsLoading}
-                />
+                    disableSave={detailsIsLoading} />
                 <Table
                     data={detailsTable}
                     setData={setDetailsTable}
                     isLoading={detailsIsLoading}
-                    onSave={output => patchDetails({ id, output })}
                     configColumns={configDetails} />
                 <Banner title="Métricas extraidas" description="Dados médicos baseados na lista de parâmetros previamente cadastrados"
-                    data={metricsData} mutate={requestMetrics} />
+                    data={metricsData}
+                    mutate={requestMetrics}
+                    onSave={saveMetrics}
+                    disableSave={metricsIsLoading} />
                 <Table
                     data={metricsTable}
                     setData={setMetricsTable}
                     isLoading={metricsIsLoading}
-                    onSave={output => patchDetails({ id, output })}
-                    validate={output =>
-                        Object.values(output).some(v => v?.length > 1)
-                            ? 'Cada parâmetro deve conter no máximo um valor.' : undefined
-                    }
                     configColumns={configMetrics} />
                 <Banner title="Dados do paciente" description="Nenhum dos dados mostrados a seguir foi compartilhado ou armazenado sem autorização"
                     data={patientData}
-                    mutate={requestPatient} />
+                    mutate={requestPatient}
+                    onSave={savePatient}
+                    disableSave={patientIsLoading} />
                 <Table
                     data={patientTable}
                     setData={setPatientTable}
                     isLoading={patientIsLoading}
-                    onSave={output => patchPatient({ id, output })}
                     configColumns={configPatient} />
             </Flex>
         </Splitter.Panel>
