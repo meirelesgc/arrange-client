@@ -112,6 +112,12 @@
     cursor: pointer;
 }
 
+.loading-header-icon {
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
 .ant-btn:hover {
     color: #1b6093 !important;
     border-color: #1b6093 !important;
