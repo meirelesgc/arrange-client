@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import Document from '../pages/Document';
 import Params from '../pages/Params';
 import Arrange from '../pages/Arrange';
+import Patient from '../pages/Patient';
 
 export const router = createBrowserRouter([
     {
@@ -13,7 +14,8 @@ export const router = createBrowserRouter([
             { index: true, element: <Home /> },
             { path: '/doc/', element: <Document /> },
             { path: '/doc/:id/', element: <Arrange /> },
-            { path: '/param/', element: <Params /> }
+            { path: '/param/', element: <Params /> },
+            { path: '/patient/', element: <Patient /> }
         ]
     }
 ]);
