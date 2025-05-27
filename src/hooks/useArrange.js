@@ -1,7 +1,10 @@
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query"
+
 import { getMetrics, putMetrics, patchMetrics } from "../services/arrangeClient"
 import { getDetails, putDetails, patchDetails } from "../services/arrangeClient"
 import { getPatient, putPatient, patchPatient } from "../services/arrangeClient"
+
+import { exportData } from "../services/arrangeClient";
 
 export function useGetMetrics(id) {
     return useQuery({
@@ -107,6 +110,29 @@ export function usePatchPatient() {
         },
         onError: (error) => {
             console.log('Falha', error);
+        },
+    });
+}
+
+export function useExportData() {
+    return useMutation({
+        mutationFn: exportData,
+        onSuccess: (data) => {
+            const blob = new Blob([data], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'export.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+
+            console.log('Exportação bem-sucedida!');
+        },
+        onError: (error) => {
+            console.error('Falha na exportação:', error);
         },
     });
 }

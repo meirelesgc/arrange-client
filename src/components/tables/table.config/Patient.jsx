@@ -13,12 +13,6 @@ const formatDate = (dateString) => new Date(dateString).toLocaleDateString('pt-B
 export default function Config(handleDelete) {
     return [
         {
-            dataIndex: 'status',
-            key: 'status',
-            width: '5%',
-            align: 'center'
-        },
-        {
             dataIndex: 'id',
             key: 'id',
             title: "Identificador",

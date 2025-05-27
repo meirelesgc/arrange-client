@@ -1,18 +1,28 @@
 import { useState } from "react";
 
 import { Flex } from "antd";
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
 
 import Banner from '../components/banners/Banner'
 import Drawer from "../components/drawers/PatientDrawer";
 import { Table } from "../components/tables/PatientTable";
 
+import { useExportData } from "../hooks/useArrange";
+
 export default function Patients() {
+    const { mutate } = useExportData()
     const [collapsed, setCollapsed] = useState(false);
+    const [patients, setPatients] = useState([]);
+
 
     const toggleDrawer = () => {
         setCollapsed(!collapsed);
     };
+
+    const handleExport = () => {
+        mutate()
+        console.log(patients)
+    }
 
     const sendDrawer = () => {
         return {
@@ -22,6 +32,17 @@ export default function Patients() {
             onClick: () => toggleDrawer()
         };
     };
+
+    const exportData = () => {
+        return {
+            label: "Adicionar",
+            icon: <DownloadOutlined />,
+            type: "default",
+            onClick: () => handleExport()
+        };
+    };
+
+
     return <div style={{ flex: 1 }}>
         <Flex vertical gap='2.3rem'>
             <Drawer
@@ -31,8 +52,8 @@ export default function Patients() {
             <Banner
                 title='Gerenciamento dos pacientes'
                 description='Aqui você pode ver a lista de pacientes que identificamos e exportar os dados extraidos.'
-                buttons={[sendDrawer()]} />
-            <Table />
+                buttons={[sendDrawer(), exportData()]} />
+            <Table setPatients={setPatients} />
         </Flex>
     </div>
 };
