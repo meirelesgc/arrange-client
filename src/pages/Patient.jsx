@@ -5,7 +5,7 @@ import { UploadOutlined } from '@ant-design/icons';
 
 import Banner from '../components/banners/Banner'
 import Drawer from "../components/drawers/PatientDrawer";
-import { Table } from "../components/tables/ParamTable";
+import { Table } from "../components/tables/PatientTable";
 
 export default function Patients() {
     const [collapsed, setCollapsed] = useState(false);
@@ -13,6 +13,7 @@ export default function Patients() {
     const toggleDrawer = () => {
         setCollapsed(!collapsed);
     };
+
     const sendDrawer = () => {
         return {
             label: "Adicionar",

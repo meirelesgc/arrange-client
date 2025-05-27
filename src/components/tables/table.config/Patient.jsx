@@ -1,36 +1,54 @@
-import { Input } from "antd";
+import { Typography, Space, Divider } from "antd"
 
-export default function Config(handleChange) {
+function Button({ record, handleDelete }) {
+    return <Space split={<Divider type="vertical" />}>
+        <Typography.Link onClick={() => handleDelete(record)}>Deletar</Typography.Link>
+    </ Space>
+}
 
-    const paramTranslation = {
-        email: "E-mail",
-        phone: "Telefone",
-        gender: "Gênero",
-        full_name: "Nome completo",
-        insurance: "Convênio",
-        date_of_birth: "Data de nascimento",
-        admission_date: "Data de admissão",
-    };
+const formatDate = (dateString) => new Date(dateString).toLocaleDateString('pt-BR',
+    { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }
+);
 
-    function outputRender(_, record) {
-        return <Input style={{ width: '100%' }} value={record.output}
-            onChange={(e) => handleChange(record.param, e.target.value)} />
-    }
-
+export default function Config(handleDelete) {
     return [
         {
-            title: "Parâmetro",
-            dataIndex: "param",
-            key: "param",
-            width: '50%',
-            render: (param) => paramTranslation[param] || param
+            dataIndex: 'status',
+            key: 'status',
+            width: '5%',
+            align: 'center'
         },
         {
-            title: "Dado extraído",
-            dataIndex: "output",
-            key: "output",
-            width: '50%',
-            render: outputRender
+            dataIndex: 'id',
+            key: 'id',
+            title: "Identificador",
+            width: '20%',
+            ellipsis: true
+        },
+        {
+            dataIndex: 'full_name',
+            key: 'full_name',
+            title: 'Nome Completo',
+            width: '40%',
+            ellipsis: true
+        },
+        {
+            dataIndex: "created_at",
+            key: "created_at",
+            title: "Adicionado em",
+            render: formatDate,
+            width: '20%',
+            ellipsis: true
+        },
+        {
+            key: "action",
+            render: (record) => {
+                return <Button
+                    record={record}
+                    handleDelete={handleDelete} />
+            },
+            width: '15%',
+            align: 'center'
         }
-    ];
+    ]
 }

@@ -11,3 +11,24 @@ export function useCreatePatient() {
         onError: (error) => { console.log('Falha', error) },
     });
 }
+
+export function useFetchPatients() {
+    return useQuery({
+        queryKey: ['fetchPatients'],
+        queryFn: fetchPatients,
+        onSuccess: () => { console.log('Sucesso') },
+        onError: (error) => { console.log('Falha', error) },
+    })
+}
+
+export function useDeletePatient() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: deletePatient,
+        onSuccess: () => {
+            queryClient.invalidateQueries(['fetchPatients']);
+            console.log('Sucesso')
+        },
+        onError: (error) => { console.log('Falha', error) },
+    })
+}
