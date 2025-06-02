@@ -1,19 +1,27 @@
 import { Input } from "antd";
 
 export default function Config(handleChange) {
-
     const paramTranslation = {
         email: "E-mail",
         phone: "Telefone",
-        gender: "Gênero",
+        gender: "Sexo",
         full_name: "Nome completo",
         insurance: "Convênio",
         date_of_birth: "Data de nascimento",
         admission_date: "Data de admissão",
     };
 
+    const genderTranslation = {
+        MALE: "Masculino",
+        FEMALE: "Feminino"
+    };
+
     function outputRender(_, record) {
-        return <Input style={{ width: '100%' }} value={record.output}
+        const value = record.param === 'gender'
+            ? genderTranslation[record.output] || record.output
+            : record.output;
+
+        return <Input style={{ width: '100%' }} value={value}
             onChange={(e) => handleChange(record.param, e.target.value)} />
     }
 

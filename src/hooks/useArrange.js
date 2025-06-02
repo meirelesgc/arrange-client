@@ -118,12 +118,12 @@ export function useExportData() {
     return useMutation({
         mutationFn: exportData,
         onSuccess: (data) => {
-            const blob = new Blob([data], { type: 'text/csv' });
+            const blob = new Blob([data], { type: 'application/zip' });
             const url = window.URL.createObjectURL(blob);
 
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'export.csv';
+            a.download = 'export.zip';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
