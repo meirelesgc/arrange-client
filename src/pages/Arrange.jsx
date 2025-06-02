@@ -7,9 +7,10 @@ import Banner from '../components/banners/ArBanner';
 import Table from '../components/tables/ArTable';
 
 import { useGetDetails, usePutDetails, usePatchDetails, useGetMetrics, usePutMetrics, usePatchMetrics, useGetPatient, usePutPatient, usePatchPatient } from '../hooks/useArrange';
+
 import configDetails from '../components/tables/table.config/Details';
 import configMetrics from '../components/tables/table.config/Metrics';
-import configPatient from '../components/tables/table.config/Patient';
+import configPatient from '../components/tables/table.config/ArPatient';
 
 import { toTableData } from '../utils/transform';
 

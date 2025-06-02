@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { Flex } from "antd";
-import { UploadOutlined, DownloadOutlined } from '@ant-design/icons';
+import { PlusOutlined, CloudUploadOutlined } from '@ant-design/icons';
 
 import Banner from '../components/banners/Banner'
 import Drawer from "../components/drawers/PatientDrawer";
@@ -27,7 +27,7 @@ export default function Patients() {
     const sendDrawer = () => {
         return {
             label: "Adicionar",
-            icon: <UploadOutlined />,
+            icon: <PlusOutlined />,
             type: "primary",
             onClick: () => toggleDrawer()
         };
@@ -35,8 +35,8 @@ export default function Patients() {
 
     const exportData = () => {
         return {
-            label: "Adicionar",
-            icon: <DownloadOutlined />,
+            label: "Exportar",
+            icon: <CloudUploadOutlined />,
             type: "default",
             onClick: () => handleExport()
         };
