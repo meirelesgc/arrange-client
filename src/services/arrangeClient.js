@@ -44,3 +44,10 @@ export async function patchPatient(id, output) {
     const response = await client.patch(`/arrange/${id}/patient/`, output);
     return response.data;
 }
+
+export async function exportData() {
+    const response = await client.get(`/arrange/export/`, {
+        responseType: 'blob'
+    });
+    return response.data;
+}

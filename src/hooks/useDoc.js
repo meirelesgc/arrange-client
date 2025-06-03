@@ -29,7 +29,6 @@ export function useFetchDocFile(id) {
         queryKey: ['fetchDocFile', id],
         queryFn: () => fetchDocFile(id),
         enabled: !!id,
-        refetchOnWindowFocus: false,
         onSuccess: (data) => {
             console.log('Arquivo recuperado com sucesso:', data);
         },

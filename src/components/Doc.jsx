@@ -8,8 +8,7 @@ export default function Doc() {
     if (isLoading) return <p>Carregando...</p>;
     if (isError) return <p>Erro ao carregar o documento.</p>;
 
-    const _url = window.URL.createObjectURL(data);
 
-    return <iframe src={_url} width="100%" height="100%" title="PDF"
+    return <iframe src={data} width="100%" height="100%" title="PDF"
         style={{ border: 'none', margin: 0, padding: 0, overflow: 'hidden' }} />;
 };

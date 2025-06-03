@@ -7,7 +7,6 @@ export function useCreateParam() {
         mutationFn: createParam,
         onSuccess: () => {
             queryClient.invalidateQueries(['fetchParams']);
-            console.log('Sucesso')
         },
         onError: (error) => { console.log('Falha', error) },
     })

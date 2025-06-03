@@ -1,5 +1,7 @@
 import { client } from "../services/client";
 
+const baseURL = import.meta.env.VITE_API_URL;
+
 export async function createDoc(file) {
     const response = await client.post('/doc/', file, {
         headers: { 'Content-Type': 'multipart/form-data' }
@@ -14,10 +16,7 @@ export async function fetchDocs() {
 
 
 export async function fetchDocFile(id) {
-    const response = await client.get(`/doc/${id}/file/`, {
-        responseType: 'blob',
-    });
-    return response.data;
+    return baseURL + `/doc/${id}/file/`
 }
 
 export async function deleteDoc({ id }) {
