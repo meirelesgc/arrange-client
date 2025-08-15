@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Drawer as AntDrawer, Typography, Upload, Flex, Button, Card } from 'antd'
+import { Drawer as AntDrawer, Typography, Upload, Flex, Button, message } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 
 import { useCreateDoc } from '../../hooks/useDoc'
@@ -9,6 +9,7 @@ const { Dragger } = Upload
 export default function Drawer({ title, toggleDrawer, open }) {
     const { mutate } = useCreateDoc()
     const [fileList, setFileList] = useState([])
+    const [messageApi, contextHolder] = message.useMessage();
 
     const props = {
         beforeUpload: (file) => {
@@ -23,14 +24,21 @@ export default function Drawer({ title, toggleDrawer, open }) {
 
     const handleUpload = () => {
         fileList.forEach(file => {
-            const formData = new FormData()
-            formData.append('file', file)
-            mutate(formData)
-        })
-        setFileList([])
-    }
+            const formData = new FormData();
+            const ext = file.name.split('.').pop().toLowerCase();
+            if (ext !== 'pdf' && ext !== 'docx') {
+                messageApi.error(`Não conformidade no documento ${file.name}, processando o próximo`);
+            }
+            formData.append('file', file);
+            mutate(formData);
+        });
+        setFileList([]);
+    };
+
+
 
     return <AntDrawer title={title} onClose={toggleDrawer} open={open} size='large'>
+        {contextHolder}
         <Flex vertical gap={'large'} >
             <Dragger {...props} multiple>
                 <Flex vertical align='center'>
