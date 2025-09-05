@@ -30,9 +30,11 @@ export default function Params() {
                 toggleDrawer={toggleDrawer}
                 open={collapsed} />
             <Banner
-                title='Gerenciamento de Documentos'
-                description='Aqui você pode ver a lista de documentos cadastrados e acompanhar o estado atual do processamento.'
-                buttons={[sendDrawer()]} />
+                title='Gerenciamento de parâmetros e sinônimos'
+                description='Defina e gerencie parâmetros e seus sinônimos. Quanto mais contexto você fornecer, melhor será o processamento e os resultados.'
+                buttons={[sendDrawer()]}
+            />
+
             <Table />
         </Flex>
     </div>

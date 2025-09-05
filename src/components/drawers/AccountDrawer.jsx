@@ -5,6 +5,9 @@ import { useToken, useCreateUser, useMySelf } from '../../hooks/useUser';
 const getToken = () => localStorage.getItem('authToken');
 const setToken = (token) => localStorage.setItem('authToken', token);
 const removeToken = () => localStorage.removeItem('authToken');
+const setUserRole = (role) => localStorage.setItem('userRole', role);
+const removeUserRole = () => localStorage.removeItem('userRole'); // O parâmetro 'role' não é necessário para remover, então foi removido.
+
 
 const ROLES = {
     'ADMIN': 'Administrador',
@@ -147,7 +150,18 @@ function SignUp({ onLoginClick }) {
 function Account({ onLogout }) {
     const { data: userData, isLoading, isError } = useMySelf();
 
+    // ADICIONADO: useEffect para salvar a 'role' do usuário no localStorage
+    useEffect(() => {
+        if (userData?.role) {
+            setUserRole(userData.role);
+        }
+    }, [userData]);
+
+
     // ... (código para isLoading e isError continua o mesmo)
+    if (isLoading) return <Flex justify="center" align="center" style={{ minHeight: 200 }}><Spin /></Flex>
+    if (isError) return <Typography.Text type="danger">Não foi possível carregar os dados da conta.</Typography.Text>
+
 
     if (!userData) return null;
 
@@ -199,6 +213,7 @@ export default function Drawer({ toggleDrawer, open }) {
 
     const handleLogout = () => {
         removeToken();
+        removeUserRole(); // ADICIONADO: Remove a 'role' do usuário ao fazer logout
         setIsAuthenticated(false);
         setView('login');
     };
